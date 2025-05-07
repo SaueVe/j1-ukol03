@@ -3,11 +3,11 @@ package cz.czechitas.ukol3.model;
 public class Pamet {
     private long kapacitaPameti;
 
-    public long getKapacita() {
+    public long getKapacitaPameti() {
         return kapacitaPameti;
     }
 
-    public void setKapacita(long kapacita) {
+    public void setKapacitaPameti(long kapacita) {
         this.kapacitaPameti = kapacita;
     }
 

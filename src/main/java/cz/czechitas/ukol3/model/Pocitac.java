@@ -1,11 +1,40 @@
 package cz.czechitas.ukol3.model;
 
+import cz.czechitas.ukol3.model.Disk;
+
 public class Pocitac {
     private boolean jeZapnuty = false;
     private Procesor cpu;
     private Pamet ram;
     private Disk pevnyDisk;
+    public long velikostSouboru;
 
+
+    public void vytvorSouborOVelikosti(long velikostSouboru) {
+        if (jeZapnuty == true) {
+            pevnyDisk.setVyuziteMisto(velikostSouboru + pevnyDisk.getVyuziteMisto());
+            if (pevnyDisk.isDostatekMista() == false) {
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikostSouboru);
+            } else if (pevnyDisk.isDostatekMista() == true) {
+                return;
+            }
+        } else if (!jeZapnuty) {
+            return;
+        }
+    }
+
+    public void vymazSouboryOVelikosti(long velikostSouboru) {
+        if (jeZapnuty == true) {
+            pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikostSouboru);
+            if (pevnyDisk.isDostatekMista() == false) {
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikostSouboru);
+            } else if (pevnyDisk.isDostatekMista() == true) {
+                return;
+            }
+        } else if (!jeZapnuty) {
+            return;
+        }
+    }
 
     public Procesor getCpu() {
         return cpu;
@@ -76,5 +105,6 @@ public class Pocitac {
             setJeZapnuty(false);
         }
     }
+
 
 }
