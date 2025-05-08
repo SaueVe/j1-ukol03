@@ -8,18 +8,16 @@ public class Pocitac {
     private Pamet ram;
     private Disk pevnyDisk;
     private Disk druhyDisk;
-    public long velikostSouboru;
+    private long velikostSouboru;
 
 
     public void vytvorSouborOVelikosti(long velikostSouboru) {
         if (jeZapnuty == true) {
             long puvodniVyuziteMistoPevnehoDisku = pevnyDisk.getVyuziteMisto();
-            long puvodniVolneMistoPevnehoDisku = pevnyDisk.getKapacitaDisku()-puvodniVyuziteMistoPevnehoDisku;
+            long puvodniVolneMistoPevnehoDisku = pevnyDisk.getKapacitaDisku() - puvodniVyuziteMistoPevnehoDisku;
             pevnyDisk.setVyuziteMisto(velikostSouboru + pevnyDisk.getVyuziteMisto());
             if (pevnyDisk.isDostatekMista() == false) {
                 druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() + (velikostSouboru - puvodniVolneMistoPevnehoDisku));
-//                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto()-(velikostSouboru - (velikostSouboru-pevnyDisk.getKapacitaDisku())));
-//               pevnyDisk.setVyuziteMisto(pevnyDisk.getKapacitaDisku());
                 if (druhyDisk.isDostatekMista() == false) {
                     pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikostSouboru);
                     druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() - (velikostSouboru - puvodniVolneMistoPevnehoDisku));
@@ -27,7 +25,6 @@ public class Pocitac {
                     return;
                 } else if (druhyDisk.isDostatekMista() == true) {
                     pevnyDisk.setVyuziteMisto(pevnyDisk.getKapacitaDisku());
-
                     System.out.println("Část souboru je uložená na druhém disku.");
                     return;
                 }
@@ -41,9 +38,23 @@ public class Pocitac {
 
     public void vymazSouboryOVelikosti(long velikostSouboru) {
         if (jeZapnuty == true) {
+            long puvodniVyuziteMistoPevnehoDisku = pevnyDisk.getVyuziteMisto();
+            long puvodniVolneMistoPevnehoDisku = pevnyDisk.getKapacitaDisku() - puvodniVyuziteMistoPevnehoDisku;
             pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikostSouboru);
             if (pevnyDisk.isDostatekMista() == false) {
-                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikostSouboru);
+                druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() - (velikostSouboru - puvodniVyuziteMistoPevnehoDisku));
+
+                if (druhyDisk.isDostatekMista() == false) {
+                    pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikostSouboru);
+                    druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() + (velikostSouboru - puvodniVyuziteMistoPevnehoDisku));
+                    System.err.println("Z disků není možné vymazat takto velký soubor.");
+                    System.err.println("Využité místo nemůže být záporné.");
+                    return;
+                } else if (druhyDisk.isDostatekMista() == true) {
+                    pevnyDisk.setVyuziteMisto(0);
+                    System.out.println("Část souboru se vymazala z druhého disku.");
+                    return;
+                }
             } else if (pevnyDisk.isDostatekMista() == true) {
                 return;
             }

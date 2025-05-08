@@ -61,15 +61,29 @@ public class HlavniProgram {
 
 
         pocitac.zapniSe();
-
-        pocitac.vytvorSouborOVelikosti(200_000_000_000L);
-        System.out.println(disk1);
-        System.out.println(disk2);
         pocitac.vytvorSouborOVelikosti(20_000_000_000L);
         System.out.println(disk1);
         System.out.println(disk2);
         pocitac.vytvorSouborOVelikosti(90_000_000_000L);
         System.out.println(disk1);
         System.out.println(disk2);
+        pocitac.vytvorSouborOVelikosti(200_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
+
+
+
+        pocitac.vymazSouboryOVelikosti(3_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
+        pocitac.vymazSouboryOVelikosti(120_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
+        pocitac.vymazSouboryOVelikosti(50_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
+
+
+
     }
 }

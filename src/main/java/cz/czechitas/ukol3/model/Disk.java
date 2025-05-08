@@ -24,8 +24,9 @@ public class Disk {
             setDostatekMista(false);
         } else if (vyuziteMisto <= kapacitaDisku) {
             setDostatekMista(true);
-        } else if (vyuziteMisto < 0) {
-            System.err.println("Využité místo nemůže být záporné.");
+        }
+        if (vyuziteMisto < 0) {
+//            System.err.println("Využité místo nemůže být záporné.");
             setDostatekMista(false);
         }
         this.vyuziteMisto = vyuziteMisto;
