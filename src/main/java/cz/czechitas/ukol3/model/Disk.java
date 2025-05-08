@@ -3,14 +3,15 @@ package cz.czechitas.ukol3.model;
 public class Disk {
     private long kapacitaDisku;
     private long vyuziteMisto;
-    public boolean dostatekMista;
+    private boolean dostatekMista;
 
     public long getKapacitaDisku() {
         return kapacitaDisku;
     }
 
-    public void setKapacitaDisku(long kapacita) {
+    public long setKapacitaDisku(long kapacita) {
         this.kapacitaDisku = kapacita;
+        return kapacita;
     }
 
     public long getVyuziteMisto() {
@@ -19,12 +20,11 @@ public class Disk {
 
     public void setVyuziteMisto(long vyuziteMisto) {
         if (vyuziteMisto > kapacitaDisku) {
-            System.err.println("Nedostatek místa.");
+//            System.err.println("Nedostatek místa.");
             setDostatekMista(false);
         } else if (vyuziteMisto <= kapacitaDisku) {
             setDostatekMista(true);
-        }
-        if (vyuziteMisto < 0) {
+        } else if (vyuziteMisto < 0) {
             System.err.println("Využité místo nemůže být záporné.");
             setDostatekMista(false);
         }

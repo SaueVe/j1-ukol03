@@ -7,14 +7,30 @@ public class Pocitac {
     private Procesor cpu;
     private Pamet ram;
     private Disk pevnyDisk;
+    private Disk druhyDisk;
     public long velikostSouboru;
 
 
     public void vytvorSouborOVelikosti(long velikostSouboru) {
         if (jeZapnuty == true) {
+            long puvodniVyuziteMistoPevnehoDisku = pevnyDisk.getVyuziteMisto();
+            long puvodniVolneMistoPevnehoDisku = pevnyDisk.getKapacitaDisku()-puvodniVyuziteMistoPevnehoDisku;
             pevnyDisk.setVyuziteMisto(velikostSouboru + pevnyDisk.getVyuziteMisto());
             if (pevnyDisk.isDostatekMista() == false) {
-                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikostSouboru);
+                druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() + (velikostSouboru - puvodniVolneMistoPevnehoDisku));
+//                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto()-(velikostSouboru - (velikostSouboru-pevnyDisk.getKapacitaDisku())));
+//               pevnyDisk.setVyuziteMisto(pevnyDisk.getKapacitaDisku());
+                if (druhyDisk.isDostatekMista() == false) {
+                    pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikostSouboru);
+                    druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() - (velikostSouboru - puvodniVolneMistoPevnehoDisku));
+                    System.err.println("Kapacita obou disků je pro tento soubor nízká.");
+                    return;
+                } else if (druhyDisk.isDostatekMista() == true) {
+                    pevnyDisk.setVyuziteMisto(pevnyDisk.getKapacitaDisku());
+
+                    System.out.println("Část souboru je uložená na druhém disku.");
+                    return;
+                }
             } else if (pevnyDisk.isDostatekMista() == true) {
                 return;
             }
@@ -58,6 +74,14 @@ public class Pocitac {
 
     public void setPevnyDisk(Disk pevnyDisk) {
         this.pevnyDisk = pevnyDisk;
+    }
+
+    public Disk getDruhyDisk() {
+        return druhyDisk;
+    }
+
+    public void setDruhyDisk(Disk druhyDisk) {
+        this.druhyDisk = druhyDisk;
     }
 
     public String toString() {
@@ -106,5 +130,11 @@ public class Pocitac {
         }
     }
 
+    public long getVelikostSouboru() {
+        return velikostSouboru;
+    }
 
+    public void setVelikostSouboru(long velikostSouboru) {
+        this.velikostSouboru = velikostSouboru;
+    }
 }

@@ -14,6 +14,11 @@ public class HlavniProgram {
         disk1.setVyuziteMisto(44_440_000_000L);
         System.out.println(disk1);
 
+        Disk disk2 = new Disk();
+        disk2.setKapacitaDisku(50_000_000_000L);
+        disk2.setVyuziteMisto(15_000_000_000L);
+        System.out.println(disk2);
+
         Pamet pamet1 = new Pamet();
         pamet1.setKapacitaPameti(8_000_000_000L);
 //        System.out.println(pamet1);
@@ -26,12 +31,14 @@ public class HlavniProgram {
         Pocitac pocitac = new Pocitac();
         pocitac.setCpu(procesor1);
         pocitac.setRam(pamet1);
-        pocitac.zapniSe();
-        pocitac.isJeZapnuty();
+//        pocitac.zapniSe();
+//        pocitac.isJeZapnuty();
         pocitac.setPevnyDisk(disk1);
 //        System.out.println(pocitac);
+        pocitac.setDruhyDisk(disk2);
 
-        pocitac.vytvorSouborOVelikosti(7_000_000_000L);
+
+ /*       pocitac.vytvorSouborOVelikosti(7_000_000_000L);
         pocitac.vymazSouboryOVelikosti(2_000_000_000L);
 
         pocitac.isJeZapnuty();
@@ -50,7 +57,19 @@ public class HlavniProgram {
         pocitac.vymazSouboryOVelikosti(20_000_000_000L);
         System.out.println(disk1);
         pocitac.vypniSe();
+*/
 
 
+        pocitac.zapniSe();
+
+        pocitac.vytvorSouborOVelikosti(200_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
+        pocitac.vytvorSouborOVelikosti(20_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
+        pocitac.vytvorSouborOVelikosti(90_000_000_000L);
+        System.out.println(disk1);
+        System.out.println(disk2);
     }
 }
